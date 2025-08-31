@@ -1,0 +1,151 @@
+/* ==========================================================================
+           1. CSS STYLING & SETUP
+           - A modern, dark, clean theme.
+           - CSS variables for maintainability.
+           - CSS Grid for responsive layouts.
+           - Hover effects and transitions for a professional feel.
+           ========================================================================== */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #bb86fc;
+            --text-color: #e0e0e0;
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+
+        /* --- Animated Background --- */
+        #background-animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bg-dog-image {
+            position: absolute;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0; /* Will be faded in by Anime.js */
+            will-change: transform, opacity; /* Performance optimization */
+        }
+
+        /* --- Main App Layout --- */
+        #app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.8;
+        }
+
+        /* --- UI Controls --- */
+        #breed-select {
+            font-size: 1.2rem;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 2px solid var(--primary-color);
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            width: 100%;
+            max-width: 500px;
+            cursor: pointer;
+        }
+
+        /* --- Gallery & Favorites Sections --- */
+        .gallery-section {
+            margin-top: 3rem;
+            text-align: left;
+        }
+        h2 {
+            font-size: 2rem;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* The CSS Grid for our images */
+        .image-grid {
+            display: grid;
+            /* Responsive grid: creates as many columns as can fit with a min size of 300px */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Individual image card styling */
+        .image-card {
+            position: relative;
+            aspect-ratio: 1 / 1; /* Makes the card a perfect square */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .image-card:hover {
+            transform: scale(1.03);
+        }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Prevents images from stretching */
+        }
+        
+        /* The overlay that appears on hover */
+        .image-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .image-card:hover .overlay {
+            opacity: 1;
+        }
+        .fav-button {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Hide the gallery until a search is made */
+        #gallery-container {
+            display: none;
+        }
